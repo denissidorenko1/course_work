@@ -1,0 +1,44 @@
+{% extends 'header.html' %}
+{% block description %}
+    <div>
+    <h1>Учебный план</h1>
+    <td>Номер</td>
+    <td>Дисциплины</td>
+    <td>Количество семестров</td>
+    <br>
+    {% for i in teaching_plan %}
+        <tr>
+            <td>{{ i.number }}</td>
+            <td>{{ i.disciplines }}</td>
+            <td>{{ i.semester_count }}</td>
+        <br>
+        </tr>
+    {% endfor %}
+    </div>
+
+    <div>
+    <h1>Создать новый учебный план</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div>
+            <label>Номер учебного плана</label> <input type="number" name="teaching_plan_number" required><br>
+            <label>Дисциплины</label> <input type="text" name="teaching_plan_disciplines" required><br>
+            <label>Количество семестров</label> <input type="text" name="teaching_plan_semester_count" required><br>
+            <br>
+            <input type="submit" value="send">
+
+
+        </div>
+    </form>
+    </div>
+
+    <div>
+    <h1>Удалить Учебный план</h1>
+    <form method="POST" action="http://127.0.0.1:8000/deleteTeachingPlan/">
+        {% csrf_token %}
+        <label>Номер Учебного плана</label><input type="text" name="delete_teaching_plan_by_number" required><br>
+        <br>
+        <input type="submit" value="delete">
+    </form>
+    </div>
+{% endblock %}

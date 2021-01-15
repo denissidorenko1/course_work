@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <nav class="site-header sticky-top py-1">
+  <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <a class="py-2" href="http://127.0.0.1:8000/" aria-label="Product">
+
+        <img src="https://cs8.pikabu.ru/images/big_size_comm/2016-03_5/1458912097163946994.jpg" width="75" height="75" align="Product" >
+    </a>
+       <a class="py-2 d-none d-md-inline-block" href="http://127.0.0.1:8000/">О сайте</a>
+      <a class="py-2 d-none d-md-inline-block" href=http://127.0.0.1:8000/Faculty/>Факультеты</a>
+      <a class="py-2 d-none d-md-inline-block" href="https://trsis-labs.azurewebsites.net/jspage/">Группы</a>
+      <a class="py-2 d-none d-md-inline-block" href="https://trsis-labs.azurewebsites.net/contacts/">Сводка</a>
+      <a class="py-2 d-none d-md-inline-block" href=http://127.0.0.1:8000/admin/>Администрирование</a>
+  </div>
+</nav>
+{% block description %} {% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: dimgrey;
+  color: lightgrey;
+  text-align: center;
+}
+</style>
+
+</body>
+</html>
