@@ -280,4 +280,11 @@ class RateStudent(APIView):
             return render(request, "SubjectOfStudent.html", context)
 
     def post(self, request, pk_group, semester, subject, fio):
-        pass
+        subjects = Subject.objects.get(Student_FIO=fio, group=pk_group, Semester_number=semester, name=subject)
+        mark = request.POST.get("grade")
+        subjects.grade = mark
+        subjects.save()
+        lol = Subject.objects.filter(Student_FIO=fio, group=pk_group, Semester_number=semester, name=subject)
+        context = {"subjects": lol}
+        return render(request, "SubjectOfStudent.html", context)
+
