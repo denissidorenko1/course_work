@@ -17,7 +17,7 @@
             <td>{{ i.name }}</td>
             <td>{{ i.grade }}</td>
             <td>{{ i.teacher_name_surname }}</td>
-            <td><a href="http://127.0.0.1:8000/SubjectsOfGroup/{{ i.group }}/{{ i.Semester_number }}/{{ i.name }}/{{ i.Student_FIO }}/">Оценить</a></td>
+            <td><a href="http://127.0.0.1:8000/RateStudent/{{ i.group }}/{{ i.Semester_number }}/{{ i.name }}/{{ i.Student_FIO }}/">Оценить</a></td>
 
         <br>
         </tr>
@@ -42,16 +42,6 @@
 
 
         </div>
-    </form>
-    </div>
-
-    <div>
-    <h1>Удалить предмет</h1>
-    <form method="POST" action="http://127.0.0.1:8000/deleteGroup/">
-        {% csrf_token %}
-        <label>Номер группы</label><input type="text" name="delete_group_by_number" required><br>
-        <br>
-        <input type="submit" value="delete">
     </form>
     </div>
 {% endblock %}

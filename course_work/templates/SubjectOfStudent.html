@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'header.html' %}
+{% block description %}
+    <div>
+    <h1>Оценки по предмету: {{ subjects.name }}</h1>
+    <td>Номер группы</td>
+    <td>ФИО студента</td>
+    <td>Номер семестра</td>
+    <td>Предмет</td>
+    <td>Оценка</td>
+    <td>ФИО преподавателя</td>
+    <br>
+    {% for i in subjects %}
+        <tr>
+            <td>{{ i.group }}</td>
+            <td>{{ i.Student_FIO }}</td>
+            <td>{{ i.Semester_number }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.grade }}</td>
+            <td>{{ i.teacher_name_surname }}</td>
+            <!--<td><a href="http://127.0.0.1:8000/RateStudent/{{ i.group }}/{{ i.Semester_number }}/{{ i.name }}/{{ i.Student_FIO }}/">Оценить</a></td> -->
 
-</body>
-</html>
+        <br>
+        </tr>
+    {% endfor %}
+    </div>
+
+    <div>
+    <h1>Оценить работу студента</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div>
+            <!-- <label>Оценка:</label> <input type="text" name="Semester_number" required><br> -->
+            <select name="grade">
+                <option value="Не сдал">Не сдал</option>
+                <option value="Незачет">Незачет</option>
+                <option value="Зачет">Зачет</option>
+                <option value="Удовлетворительно">Удовлетворительно</option>
+                <option value="Хорошо">Хорошо</option>
+                <option value="Отлично">Отлично</option>
+            </select>
+
+            <br>
+            <input type="submit" value="send">
+        </div>
+    </form>
+    </div>
+{% endblock %}

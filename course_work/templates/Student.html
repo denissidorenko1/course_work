@@ -7,7 +7,6 @@
     <td>Дата рождения</td>
     <td>Иностранец</td>
     <td>Отчислен</td>
-    <td>Добавить ссылку на страницу успеваемости студента</td>
     <br>
     {% for i in student %}
         <tr>
@@ -37,14 +36,6 @@
     </form>
     </div>
     <div>
-    <h1>Удалить студента</h1>
-    <form method="POST" action="http://127.0.0.1:8000/deleteStudent/">
-        {% csrf_token %}
-        <label>ФИО студента</label><input type="text" name="delete_student_by_name_surname" required><br>
-        <br>
-        <input type="submit" value="delete">
-    </form>
-
     <h1>Отчислить студента</h1>
     <form method="POST" action="http://127.0.0.1:8000/expellStudent/">
         {% csrf_token %}
