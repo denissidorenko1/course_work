@@ -25,6 +25,15 @@ urlpatterns = [
     path('deleteFaculty/', views.deleteFaculty),
     path('TeachingPlan/', views.TeachingPlanView.as_view()),
     path('deleteTeachingPlan/', views.deleteTeachingPlan),
+    path('Group/', views.GroupView.as_view()),
+    path('deleteGroup/', views.deleteGroup),
+    path('Students/', views.StudentView.as_view()),
+    path('expellStudent/', views.expellStudent),
+    path('deleteStudent/', views.deleteStudent),
+    path('SubjectsOfGroup/<str:pk_group>/', views.SubjectView.as_view()),
+    path('SubjectsOfGroup/', views.SubjectView.as_view()),
+    path('RateStudent/<str:pk_group>/<str:semester>/<str:subject>/<str:fio>/', views.RateStudent.as_view())
+
 
 
 

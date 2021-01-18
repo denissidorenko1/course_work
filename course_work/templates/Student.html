@@ -1,44 +1,56 @@
 {% extends 'header.html' %}
 {% block description %}
     <div>
-    <h1>Текущие факультеты</h1>
-    <td>Название факультета</td>
-    <td>Номер факультета</td>
-    <td>Информация о факультете</td>
+    <h1>Студенты</h1>
+    <td>Группа</td>
+    <td>ФИО</td>
+    <td>Дата рождения</td>
+    <td>Иностранец</td>
+    <td>Отчислен</td>
+    <td>Добавить ссылку на страницу успеваемости студента</td>
     <br>
-    {% for i in faculty %}
+    {% for i in student %}
         <tr>
-        <td>{{ i.faculty_name }}</td>
-        <td>{{ i.faculty_number }}</td>
-        <td>{{ i.faculty_info }}</td>
+            <td>{{ i.Group_num }}</td>
+            <td>{{ i.name_surname }}</td>
+            <td>{{ i.birthday }}</td>
+            <td>{{ i.is_foreigner }}</td>
+            <td>{{ i.is_expelled }}</td>
         <br>
         </tr>
     {% endfor %}
     </div>
 
     <div>
-    <h1>Создать новый факультет</h1>
+    <h1>Добавить студента</h1>
     <form method="POST" action="">
         {% csrf_token %}
         <div>
-            <label>Номер факультета</label> <input type="number" name="faculty_number" required><br>
-            <label>Название факультета</label> <input type="text" name="faculty_name" required><br>
-            <label>Инфо о факультете</label> <input type="text" name="faculty_info" required><br>
+            <label>Группа</label> <input type="text" name="Group_num" required><br>
+            <label>Фамилия, имя, отчество</label> <input type="text" name="name_surname" required><br>
+            <label>Дата рождени</label> <input type="date" name="birthday" required><br>
+            <label>Иностранец</label> <input type="checkbox" name="is_foreigner"><br>
+            <!-- <label>Отчислен</label> <input type="text" name="faculty_info" required><br> -->
             <br>
             <input type="submit" value="send">
-
-
         </div>
     </form>
     </div>
-
     <div>
-    <h1>Удалить факультет</h1>
-    <form method="POST" action="http://127.0.0.1:8000/deleteFaculty/">
+    <h1>Удалить студента</h1>
+    <form method="POST" action="http://127.0.0.1:8000/deleteStudent/">
         {% csrf_token %}
-        <label>Номер факультета</label><input type="text" name="delete_faculty_by_number" required><br>
+        <label>ФИО студента</label><input type="text" name="delete_student_by_name_surname" required><br>
         <br>
         <input type="submit" value="delete">
+    </form>
+
+    <h1>Отчислить студента</h1>
+    <form method="POST" action="http://127.0.0.1:8000/expellStudent/">
+        {% csrf_token %}
+        <label>ФИО студента</label><input type="text" name="expell_student_by_name_surname" required><br>
+        <br>
+        <input type="submit" value="Отчислить!">
     </form>
     </div>
 {% endblock %}

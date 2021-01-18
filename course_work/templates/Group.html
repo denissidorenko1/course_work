@@ -5,12 +5,14 @@
     <td>Номер группы</td>
     <td>Номер учебного плана группы</td>
     <td>Номер Факультета</td>
+    <td>Предметы</td>
     <br>
     {% for i in group %}
         <tr>
         <td>{{ i.group_number }}</td>
         <td>{{ i.teaching_plan }}</td>
         <td>{{ i.Faculty_FK }}</td>
+        <td><a href="http://127.0.0.1:8000/SubjectsOfGroup/{{ i.group_number }}/">Предметы</a></td>
         <br>
         </tr>
     {% endfor %}
@@ -21,9 +23,9 @@
     <form method="POST" action="">
         {% csrf_token %}
         <div>
-            <label>Номер группу</label> <input type="number" name="faculty_number" required><br>
-            <label>Название </label> <input type="text" name="faculty_name" required><br>
-            <label>Инфо о факультете</label> <input type="text" name="faculty_info" required><br>
+            <label>Номер группы</label> <input type="text" name="group_number" required><br>
+            <label>Учебный план</label> <input type="text" name="teaching_plan" required><br>
+            <label>Факультет</label> <input type="text" name="Faculty_FK" required><br>
             <br>
             <input type="submit" value="send">
 
@@ -33,10 +35,10 @@
     </div>
 
     <div>
-    <h1>Удалить факультет</h1>
-    <form method="POST" action="http://127.0.0.1:8000/deleteFaculty/">
+    <h1>Удалить группу</h1>
+    <form method="POST" action="http://127.0.0.1:8000/deleteGroup/">
         {% csrf_token %}
-        <label>Номер факультета</label><input type="text" name="delete_faculty_by_number" required><br>
+        <label>Номер группы</label><input type="text" name="delete_group_by_number" required><br>
         <br>
         <input type="submit" value="delete">
     </form>

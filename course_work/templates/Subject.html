@@ -1,0 +1,57 @@
+{% extends 'header.html' %}
+{% block description %}
+    <div>
+    <h1>Оценки группы по семестрам:</h1>
+    <td>Номер группы</td>
+    <td>ФИО студента</td>
+    <td>Номер семестра</td>
+    <td>Предмет</td>
+    <td>Оценка</td>
+    <td>ФИО преподавателя</td>
+    <br>
+    {% for i in subjects %}
+        <tr>
+            <td>{{ i.group }}</td>
+            <td>{{ i.Student_FIO }}</td>
+            <td>{{ i.Semester_number }}</td>
+            <td>{{ i.name }}</td>
+            <td>{{ i.grade }}</td>
+            <td>{{ i.teacher_name_surname }}</td>
+            <td><a href="http://127.0.0.1:8000/SubjectsOfGroup/{{ i.group }}/{{ i.Semester_number }}/{{ i.name }}/{{ i.Student_FIO }}/">Оценить</a></td>
+
+        <br>
+        </tr>
+    {% endfor %}
+    </div>
+
+    <div>
+    <h1>Добавить новый предмет с оценкой</h1>
+        <h6>Предмет будет добавлен всем студентам, оценка по умолчанию это "не аттестован"</h6>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div>
+            <!--<label>ФИО студента</label> <input type="text" name="Student_FIO" required><br> -->
+            <label>Номер семестра</label> <input type="text" name="Semester_number" required><br>
+            <!--<label>Оценка</label> <input type="text" name="grade" required><br> -->
+            <!--<label>Номер группы</label> <input type="text" name="group" required><br> -->
+            <label>Название предмета</label> <input type="text" name="name" required><br>
+            <label>ФИО преподавателя</label> <input type="text" name="teacher_name_surname" required><br>
+
+            <br>
+            <input type="submit" value="send">
+
+
+        </div>
+    </form>
+    </div>
+
+    <div>
+    <h1>Удалить предмет</h1>
+    <form method="POST" action="http://127.0.0.1:8000/deleteGroup/">
+        {% csrf_token %}
+        <label>Номер группы</label><input type="text" name="delete_group_by_number" required><br>
+        <br>
+        <input type="submit" value="delete">
+    </form>
+    </div>
+{% endblock %}

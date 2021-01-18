@@ -19,46 +19,50 @@ class TeachingPlan(models.Model):
     def __str__(self):
         return self.id
 
-class Group(models.Model):
-    group_number = models.CharField("Номер группы", max_length=10, default="0000")
-    #teaching_plan = models.IntegerField("Учебный план", default=-1)
-    teaching_plan = models.ForeignKey(TeachingPlan, null=True, on_delete=models.SET_NULL)
-    Faculty_FK = models.ForeignKey(Faculty, null=True, on_delete=models.SET_NULL)
-
-    def __str__(self):
-        return self.group_number
-
-class Student(models.Model):
-    #Group_id = models.IntegerField("Внешний ключ от класса Group", default=0)
-    Group_id = models.ForeignKey(Group, null=True, on_delete= models.SET_NULL)
-    #photo = models.ImageField("Фотка", width_field=640, height_field=480)
-    name_surname = models.CharField("ФИО", default="Пупкин Вася Станиславович", max_length=50)
-    birthday = models.CharField("ДР", default="01.01.1800", max_length=15)
-    is_foreigner = models.BooleanField("Является ли иностранцем", default=0)
-    is_expelled = models.BooleanField("Является ли отчисленным", default=0)
-
-    def __str__(self):
-        return self.name_surname
 
 class Semester(models.Model):
-    TeachingPlan_id = models.ForeignKey(TeachingPlan, null=True, on_delete=models.SET_NULL)
-
+    # TeachingPlan_id = models.ForeignKey(TeachingPlan, null=True, on_delete=models.SET_NULL)
+    TeachingPlan_id = models.CharField("Номер учебного плана", max_length=30, null=True)
     semester_number = models.IntegerField("Номер семестра", default=0)
-    start_date = models.CharField("Дата начала семестра", default="01.01.1800", max_length=10)
-    stop_date = models.CharField("Дата окончания семестра", default="01.01.1800", max_length=10)
+    # start_date = models.DateField()
+    # stop_date = models.DateField()
 
     def __str__(self):
         return self.semester_number
 
+class Student(models.Model):
+    Group_num = models.CharField("Номер группы", max_length=10, default="0000")
+    # Group_id = models.ForeignKey(Group, null=True, on_delete= models.SET_NULL)
+    #photo = models.ImageField("Фотка", width_field=640, height_field=480)
+    name_surname = models.CharField("ФИО", default="Пупкин Вася Станиславович", max_length=50)
+    # birthday = models.CharField("ДР", default="01.01.1800", max_length=15)
+    birthday = models.DateField()
+    is_foreigner = models.BooleanField("Является ли иностранцем", null=True)
+    is_expelled = models.BooleanField("Является ли отчисленным", null=True)
 
+    def __str__(self):
+        return self.name_surname
+
+
+# Связующая таблица между студентом и семестром
 class Subject(models.Model):
-
+    Student_FIO = models.CharField("ФИО", default="Пупкин Вася Станиславович", max_length=50)
+    Semester_number = models.IntegerField("Номер семестра", default=0, null=True) # теперь не является внешним ключом
+    grade = models.CharField("Оценка", max_length=30, null=True)
+    group = models.CharField("Номер группы", max_length=10, default="0000")
     name = models.CharField("Название предмета", max_length=100)
-    lecturer_name_surname = models.CharField("ФИО лектора", max_length=100)
-    practice_name_surname = models.CharField("Фио преподавателя практики", max_length=100)
-    grading_method = models.CharField("Метод оценивания", max_length=30, default="Стандартный")
+    teacher_name_surname = models.CharField("ФИО лектора", max_length=100)
+    # practice_name_surname = models.CharField("Фио преподавателя практики", max_length=100)
+    #grading_method = models.CharField("Метод оценивания", max_length=30, default="Стандартный")
 
     def __str__(self):
         return self.name
 
+class Group(models.Model):
+    group_number = models.CharField("Номер группы", max_length=10, default="0000")
+    teaching_plan = models.CharField("Номер учебного плана", max_length=30, null=True)
+    Faculty_FK = models.IntegerField("Номер факультета", default=0)
+
+    def __str__(self):
+         return self.group_number
 
